@@ -25,32 +25,33 @@ namespace NotesApp
                     {
                         if (reader.HasRows)
                         {
-                            Console.WriteLine($"Para el sr {reader.GetString(reader.GetOrdinal("Nombre"))}");
+                            int whil = 0;
+                            
                             while (reader.Read())
                             {
-                                
-                                Console.WriteLine($"tiene la tarea de {reader.GetString(reader.GetOrdinal("texto"))} para el dia {reader.GetDateTime(reader.GetOrdinal("to_day")).ToString("dd/MM/yyyy")}");
+                                if (whil <1) {Console.WriteLine($"Para el sr {reader.GetString(reader.GetOrdinal("Nombre"))}"); }
+                                whil++;
+
+                                Console.WriteLine($"tiene la tarea de \t {reader.GetString(reader.GetOrdinal("texto"))} \n para el dia {reader.GetDateTime(reader.GetOrdinal("to_day")).ToString("dd/MM/yyyy")}");
                             }
-                            var dt = new DataTable();
-                            var da = new SqlDataAdapter(cmd);
-                            da.Fill(dt);
-                            _dt= dt;
+                           
                         }
                         else
                         {
                             Console.WriteLine("No se encontraron notas para el usuario especificado.");
-                            Program
+                            Program.RestartApplication();
                         }
                     }
                 }
             }
 
-            Console.Write("You wanna create new Task ?");
+            Console.Write("You wanna create new Task?  Y / N ");
             string response = Console.ReadLine();
-            if (response == "y" || response == "Y") 
-            { 
-                CreateNote newNote = new CreateNote();
+            if (response == "y" || response == "Y")
+            {
+                CreateNote newNote = new CreateNote($"%{name}%",configString);
             }
+            else { }
             
         }
         public DataTable PrintDataTable { 

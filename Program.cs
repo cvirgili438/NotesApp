@@ -14,6 +14,7 @@ namespace NotesApp
     {
         static void Main(string[] args)
         {
+            Console.Clear();          
             Console.WriteLine("Welcome to your notes applications");
             Console.WriteLine("Please, Type your name ");    
             string name = Console.ReadLine(); 
